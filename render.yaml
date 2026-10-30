@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: wind-forecast-backend
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: DATA_DIR
+        value: /app/data
+      - key: ALLOWED_ORIGINS
+        value: "*"

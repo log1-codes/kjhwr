@@ -1,0 +1,7 @@
+# docker-compose.override.yml
+# Development override for local live reload and live source mounting
+services:
+  backend:
+    volumes:
+      - ./backend/app:/app/backend/app:ro
+    command: ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
