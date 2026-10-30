@@ -37,9 +37,13 @@ def resolve_data_dir(custom_dir: Optional[str] = None) -> str:
 
     candidate_dirs = [
         os.getenv("DATA_DIR"),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data")),
         os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "data", "raw")),
         os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "raw")),
-        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data")),
+        os.path.abspath(os.path.join(os.getcwd(), "data")),
+        os.path.abspath(os.path.join(os.getcwd(), "backend", "data")),
+        "/var/task/data",
+        "/var/task/backend/data",
         "/app/data",
         "/app/data/raw",
     ]
@@ -257,12 +261,15 @@ class DataService:
                 )
             )
 
-            # Atomically save to disk
-            with open(self.actuals_file, "w", encoding="utf-8") as f:
-                json.dump(deduped_actuals, f, indent=2)
+            # Atomically save to disk (if filesystem is writable)
+            try:
+                with open(self.actuals_file, "w", encoding="utf-8") as f:
+                    json.dump(deduped_actuals, f, indent=2)
 
-            with open(self.forecasts_file, "w", encoding="utf-8") as f:
-                json.dump(deduped_forecasts, f, indent=2)
+                with open(self.forecasts_file, "w", encoding="utf-8") as f:
+                    json.dump(deduped_forecasts, f, indent=2)
+            except OSError as os_err:
+                logger.warning("Filesystem is read-only; skipping disk cache persistence: %s", os_err)
 
             # Atomically update in-memory state under lock
             with self._lock:

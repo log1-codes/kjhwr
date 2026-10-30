@@ -38,7 +38,7 @@ from backend.app.analysis import (
     parse_iso_datetime
 )
 
-router = APIRouter(prefix="/api", tags=["analytics"])
+router = APIRouter(tags=["analytics"])
 REFRESH_SECRET = os.getenv("REFRESH_SECRET", "")
 
 

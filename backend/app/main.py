@@ -52,8 +52,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include API routes
-app.include_router(api_router)
+# Include API routes mounted at /api and root for proxy compatibility
+app.include_router(api_router, prefix="/api")
+app.include_router(api_router, prefix="")
 
 
 @app.get("/", tags=["root"])
