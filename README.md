@@ -1,7 +1,7 @@
 # UK Day-Ahead Wind Forecast & Actuals Analytics Platform
 
-> **Live Deployment:** [https://kjhwr.vercel.app](https://kjhwr.vercel.app) *(Deployment placeholder — update with final URL)*  
-> **Interactive API Docs:** [https://kjhwr.vercel.app/docs](https://kjhwr.vercel.app/docs)  
+> **Live Deployment:** [https://kjhwr-kappa-three.vercel.app](https://kjhwr-kappa-three.vercel.app)  
+> **Interactive API Docs:** [https://kjhwr-kappa-three.vercel.app/docs](https://kjhwr-kappa-three.vercel.app/docs)  
 > **Evaluation Period:** January 2026 (1,488 settlement periods)  
 > **Target Audience:** UK Wholesale Day-Ahead Power Buyers (EPEX Spot / Nord Pool)
 
